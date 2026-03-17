@@ -106,42 +106,42 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form
+  action="https://formspree.io/f/mnjgoaow"
+  method="POST"
+  className="space-y-5"
+>
+  <input
+    type="text"
+    name="name"
+    placeholder="Your Name"
+    required
+    className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+  />
 
-              <Input
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
-                required
-              />
+  <input
+    type="email"
+    name="email"
+    placeholder="Your Email"
+    required
+    className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+  />
 
-              <Input
-                type="email"
-                placeholder="Your Email"
-                value={form.email}
-                onChange={(e) =>
-                  setForm({ ...form, email: e.target.value })
-                }
-                required
-              />
+  <textarea
+    name="message"
+    placeholder="Your Message"
+    rows={5}
+    required
+    className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+  />
 
-              <Textarea
-                placeholder="Your Message"
-                rows={5}
-                value={form.message}
-                onChange={(e) =>
-                  setForm({ ...form, message: e.target.value })
-                }
-                required
-              />
-
-              <button
-                type="submit"
-                disabled={submitted}
-                className="w-full py-3 bg-emerald-500 text-black rounded-xl"
-              >
+  <button
+    type="submit"
+    className="w-full py-3 bg-emerald-500 text-black rounded-xl font-semibold"
+  >
+    Send Message
+  </button>
+</form>
                 {submitted ? (
                   <span className="flex items-center justify-center gap-2">
                     <CheckCircle size={16} />
