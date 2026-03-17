@@ -26,31 +26,43 @@ const socials = [
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
     message: '',
   });
 
-  // ✅ Formspree submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const response = await fetch("https://formspree.io/f/mnjgoaow", {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        access_key: "2a00a70d-84b7-428d-9a1e-643481706db7",
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        subject: "New Portfolio Message 🚀",
+        replyto: form.email, // ✅ AUTO REPLY ENABLED
+      }),
     });
 
-    if (response.ok) {
+    const result = await response.json();
+
+    if (result.success) {
+      setLoading(false);
       setSubmitted(true);
       setForm({ name: '', email: '', message: '' });
 
       setTimeout(() => setSubmitted(false), 3000);
     } else {
+      setLoading(false);
       alert("Something went wrong ❌");
     }
   };
@@ -58,18 +70,12 @@ export default function ContactSection() {
   return (
     <section id="contact" className="relative py-28 bg-zinc-950">
 
-      {/* Background fix */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/3 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
 
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div className="text-center mb-16">
           <p className="text-emerald-400 text-sm uppercase mb-2">
             Let's connect
           </p>
@@ -81,98 +87,74 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
 
           {/* LEFT SIDE */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <p className="text-zinc-400">
-              I'm always open to discussing new projects or opportunities.
-            </p>
-
-            <div className="space-y-4">
-              {socials.map(({ icon: Icon, label, value, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500 transition cursor-pointer"
-                >
-                  <Icon className="text-emerald-400" size={18} />
-                  <div>
-                    <p className="text-xs text-zinc-500">{label}</p>
-                    <p className="text-sm text-white">{value}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-
+          <div className="space-y-6">
+            {socials.map(({ icon: Icon, label, value, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500"
+              >
+                <Icon className="text-emerald-400" size={18} />
+                <div>
+                  <p className="text-xs text-zinc-500">{label}</p>
+                  <p className="text-sm text-white">{value}</p>
+                </div>
+              </a>
+            ))}
             <ResumePreview />
-          </motion.div>
+          </div>
 
           {/* RIGHT SIDE FORM */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
 
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
-                placeholder="Your Name"
-                required
-                className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
-              />
+            <input
+              type="text"
+              value={form.name}
+              onChange={(e) =>
+                setForm({ ...form, name: e.target.value })
+              }
+              placeholder="Your Name"
+              required
+              className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+            />
 
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) =>
-                  setForm({ ...form, email: e.target.value })
-                }
-                placeholder="Your Email"
-                required
-                className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
-              />
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) =>
+                setForm({ ...form, email: e.target.value })
+              }
+              placeholder="Your Email"
+              required
+              className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+            />
 
-              <textarea
-                rows={5}
-                value={form.message}
-                onChange={(e) =>
-                  setForm({ ...form, message: e.target.value })
-                }
-                placeholder="Your Message"
-                required
-                className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
-              />
+            <textarea
+              rows={5}
+              value={form.message}
+              onChange={(e) =>
+                setForm({ ...form, message: e.target.value })
+              }
+              placeholder="Your Message"
+              required
+              className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
+            />
 
-              <button
-                type="submit"
-                className="w-full py-3 bg-emerald-500 text-black rounded-xl font-semibold flex items-center justify-center gap-2"
-              >
-                {submitted ? (
-                  <>
-                    <CheckCircle size={16} />
-                    Message Sent
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Send Message
-                  </>
-                )}
-              </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-emerald-500 text-black rounded-xl font-semibold flex items-center justify-center gap-2"
+            >
+              {loading
+                ? "Sending..."
+                : submitted
+                ? "Message Sent ✅"
+                : "Send Message"}
+            </button>
 
-            </form>
-          </motion.div>
-
+          </form>
         </div>
       </div>
     </section>
