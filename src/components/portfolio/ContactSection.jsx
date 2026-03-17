@@ -11,7 +11,7 @@ const RESUME_URL = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/p
 const socials = [
   { icon: Mail, label: 'Email', value: 'manchalaganesh12@gmail.com', href: 'mailto:manchalaganesh12@gmail.com' },
   { icon: Github, label: 'GitHub', value: 'github.com/ganesh', href: 'https://github.com/manchalaganesh' },
-  { icon: Linkedin, label: 'LinkedIn', value: 'https://www.linkedin.com/in/ganesh-manchala/', href: 'https://www.linkedin.com/in/ganesh-manchala/' },
+  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/ganesh', href: 'https://www.linkedin.com/in/ganesh-manchala/' },
 ];
 
 export default function ContactSection() {
