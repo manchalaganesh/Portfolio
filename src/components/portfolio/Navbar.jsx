@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -38,10 +38,19 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        
+        {/* Logo + Name */}
         <button onClick={() => handleClick('#hero')} className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all">
-            <Code2 className="w-5 h-5 text-emerald-400" />
+          
+          {/* Profile Image (NO IMPORT) */}
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-emerald-500/30 shadow-md shadow-emerald-500/20 transform group-hover:scale-110 transition-all duration-300">
+            <img
+              src="https://res.cloudinary.com/doxeuimhd/image/upload/v1773502332/std5ergpi3jnprky4eku_hvmrdl.jpg"
+              alt="Ganesh"
+              className="w-full h-full object-cover"
+            />
           </div>
+
           <span className="text-lg font-semibold text-white tracking-tight">
             Ganesh<span className="text-emerald-400">.</span>
           </span>
