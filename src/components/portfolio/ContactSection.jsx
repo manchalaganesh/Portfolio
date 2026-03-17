@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
-import ResumePreview from './ResumePreview';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Github, Linkedin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import ResumePreview from "./ResumePreview";
 
 const socials = [
   {
     icon: Mail,
-    label: 'Email',
-    value: 'manchalaganesh12@gmail.com',
-    href: 'mailto:manchalaganesh12@gmail.com',
+    label: "Email",
+    value: "manchalaganesh12@gmail.com",
+    href: "mailto:manchalaganesh12@gmail.com",
   },
   {
     icon: Github,
-    label: 'GitHub',
-    value: 'github.com/manchalaganesh',
-    href: 'https://github.com/manchalaganesh',
+    label: "GitHub",
+    value: "github.com/manchalaganesh",
+    href: "https://github.com/manchalaganesh",
   },
   {
     icon: Linkedin,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/ganesh-manchala',
-    href: 'https://www.linkedin.com/in/ganesh-manchala/',
+    label: "LinkedIn",
+    value: "linkedin.com/in/ganesh-manchala",
+    href: "https://www.linkedin.com/in/ganesh-manchala/",
   },
 ];
 
@@ -28,52 +29,45 @@ export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: "2a00a70d-84b7-428d-9a1e-643481706db7",
-        name: form.name,
-        email: form.email,
-        message: form.message,
-        subject: "New Portfolio Message 🚀",
-        replyto: form.email, // ✅ AUTO REPLY ENABLED
-      }),
-    });
+    try {
+      await emailjs.send(
+        "service_vm2g4og",        // ✅ Service ID
+        "template_rfvyc28",        // ✅ FIXED Template ID
+        {
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        },
+        "orJ58q4Wul-IudZo7"       // ✅ Public Key
+      );
 
-    const result = await response.json();
-
-    if (result.success) {
-      setLoading(false);
       setSubmitted(true);
-      setForm({ name: '', email: '', message: '' });
+      setForm({ name: "", email: "", message: "" });
 
       setTimeout(() => setSubmitted(false), 3000);
-    } else {
-      setLoading(false);
-      alert("Something went wrong ❌");
+    } catch (error) {
+      console.error("EMAILJS ERROR:", error);
+      alert(error.text || "Failed to send message ❌");
     }
+
+    setLoading(false);
   };
 
   return (
     <section id="contact" className="relative py-28 bg-zinc-950">
-
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/3 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-
+        
         {/* Heading */}
         <motion.div className="text-center mb-16">
           <p className="text-emerald-400 text-sm uppercase mb-2">
