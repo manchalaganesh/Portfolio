@@ -40,14 +40,14 @@ export default function ContactSection() {
 
     try {
       await emailjs.send(
-        "service_vm2g4og",        // ✅ Service ID
-        "template_rfvyc28",        // ✅ FIXED Template ID
+        "service_vm2g4og", // ✅ Service ID
+        "template_rfvyc28", // ✅ FIXED Template ID
         {
           name: form.name,
           email: form.email,
           message: form.message,
         },
-        "orJ58q4Wul-IudZo7"       // ✅ Public Key
+        "orJ58q4Wul-IudZo7", // ✅ Public Key
       );
 
       setSubmitted(true);
@@ -67,19 +67,15 @@ export default function ContactSection() {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/3 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        
         {/* Heading */}
         <motion.div className="text-center mb-16">
           <p className="text-emerald-400 text-sm uppercase mb-2">
             Let's connect
           </p>
-          <h2 className="text-4xl font-bold text-white">
-            Contact Me
-          </h2>
+          <h2 className="text-4xl font-bold text-white">Contact Me</h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-
           {/* LEFT SIDE */}
           <div className="space-y-6">
             {socials.map(({ icon: Icon, label, value, href }) => (
@@ -102,13 +98,10 @@ export default function ContactSection() {
 
           {/* RIGHT SIDE FORM */}
           <form onSubmit={handleSubmit} className="space-y-5">
-
             <input
               type="text"
               value={form.name}
-              onChange={(e) =>
-                setForm({ ...form, name: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Your Name"
               required
               className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
@@ -117,9 +110,7 @@ export default function ContactSection() {
             <input
               type="email"
               value={form.email}
-              onChange={(e) =>
-                setForm({ ...form, email: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="Your Email"
               required
               className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
@@ -128,9 +119,7 @@ export default function ContactSection() {
             <textarea
               rows={5}
               value={form.message}
-              onChange={(e) =>
-                setForm({ ...form, message: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
               placeholder="Your Message"
               required
               className="w-full p-3 rounded bg-zinc-900 text-white border border-zinc-800"
@@ -144,10 +133,9 @@ export default function ContactSection() {
               {loading
                 ? "Sending..."
                 : submitted
-                ? "Message Sent ✅"
-                : "Send Message"}
+                  ? "Message Sent ✅"
+                  : "Send Message"}
             </button>
-
           </form>
         </div>
       </div>

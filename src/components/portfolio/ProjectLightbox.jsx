@@ -1,8 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  X,
+  ZoomIn,
+  ZoomOut,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
 
-export default function ProjectLightbox({ images, initialIndex = 0, onClose, projectLink, projectTitle }) {
+export default function ProjectLightbox({
+  images,
+  initialIndex = 0,
+  onClose,
+  projectLink,
+  projectTitle,
+}) {
   const [index, setIndex] = useState(initialIndex);
   const [scale, setScale] = useState(1);
 
@@ -18,12 +31,12 @@ export default function ProjectLightbox({ images, initialIndex = 0, onClose, pro
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [onClose, prev, next]);
 
   return (
@@ -39,7 +52,9 @@ export default function ProjectLightbox({ images, initialIndex = 0, onClose, pro
         <div className="flex items-center gap-3">
           <h3 className="text-white font-semibold">{projectTitle}</h3>
           {images.length > 1 && (
-            <span className="text-zinc-500 text-sm">{index + 1} / {images.length}</span>
+            <span className="text-zinc-500 text-sm">
+              {index + 1} / {images.length}
+            </span>
           )}
         </div>
         <div className="flex items-center gap-2">
@@ -51,7 +66,9 @@ export default function ProjectLightbox({ images, initialIndex = 0, onClose, pro
           >
             <ZoomOut className="w-4 h-4" />
           </button>
-          <span className="text-zinc-400 text-sm w-10 text-center">{Math.round(scale * 100)}%</span>
+          <span className="text-zinc-400 text-sm w-10 text-center">
+            {Math.round(scale * 100)}%
+          </span>
           {/* Zoom in */}
           <button
             onClick={() => setScale((s) => Math.min(4, s + 0.5))}
@@ -91,8 +108,8 @@ export default function ProjectLightbox({ images, initialIndex = 0, onClose, pro
             exit={{ opacity: 0, scale: 0.92 }}
             transition={{ duration: 0.3 }}
             className="rounded-xl shadow-2xl max-w-full max-h-[75vh] object-contain cursor-zoom-in select-none"
-            style={{ transformOrigin: 'center center' }}
-            onClick={() => setScale((s) => s < 2 ? 2 : 1)}
+            style={{ transformOrigin: "center center" }}
+            onClick={() => setScale((s) => (s < 2 ? 2 : 1))}
             draggable={false}
           />
         </AnimatePresence>
@@ -122,8 +139,11 @@ export default function ProjectLightbox({ images, initialIndex = 0, onClose, pro
           {images.map((src, i) => (
             <button
               key={i}
-              onClick={() => { setIndex(i); setScale(1); }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? 'w-8 bg-emerald-400' : 'w-2 bg-zinc-600 hover:bg-zinc-500'}`}
+              onClick={() => {
+                setIndex(i);
+                setScale(1);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-8 bg-emerald-400" : "w-2 bg-zinc-600 hover:bg-zinc-500"}`}
             />
           ))}
         </div>

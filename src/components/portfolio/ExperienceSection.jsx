@@ -1,23 +1,23 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Mic, ExternalLink } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Shield, Mic, ExternalLink } from "lucide-react";
 
 const experiences = [
   {
-    title: 'Ethical Hacking Workshop',
-    location: 'NIAT Campus',
+    title: "Ethical Hacking Workshop",
+    location: "NIAT Campus",
     description:
-      'Participated in an intensive ethical hacking workshop covering penetration testing methodologies, vulnerability assessment, and cybersecurity best practices.',
+      "Participated in an intensive ethical hacking workshop covering penetration testing methodologies, vulnerability assessment, and cybersecurity best practices.",
     icon: Shield,
-    link: 'https://acrobat.adobe.com/id/urn:aaid:sc:AP:d90029a1-ca4b-4af1-bf0a-766164c974eb?viewer%21megaVerb=group-discover',
+    link: "https://acrobat.adobe.com/id/urn:aaid:sc:AP:d90029a1-ca4b-4af1-bf0a-766164c974eb?viewer%21megaVerb=group-discover",
   },
   {
-    title: 'Build for Telangana Hackathon',
-    location: 'NIAT Campus',
+    title: "Build for Telangana Hackathon",
+    location: "NIAT Campus",
     description:
-      'Participated in the Build for Telangana Hackathon, focusing on solving real-world problems through innovative ideas and collaborative development.',
+      "Participated in the Build for Telangana Hackathon, focusing on solving real-world problems through innovative ideas and collaborative development.",
     icon: Mic,
-    link: 'https://acrobat.adobe.com/id/urn:aaid:sc:AP:4437ab58-77ca-4883-a6b6-d8222776ba92?viewer%21megaVerb=group-discover'
+    link: "https://acrobat.adobe.com/id/urn:aaid:sc:AP:4437ab58-77ca-4883-a6b6-d8222776ba92?viewer%21megaVerb=group-discover",
   },
 ];
 
@@ -32,7 +32,7 @@ export default function ExperienceSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -54,7 +54,7 @@ export default function ExperienceSection() {
                 key={exp.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="relative pl-12 pb-12 last:pb-0"
               >

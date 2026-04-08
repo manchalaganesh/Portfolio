@@ -1,12 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FileText, Download } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { FileText, Download } from "lucide-react";
 
-const RESUME_URL = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf';
+const RESUME_URL =
+  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf";
 
 export default function ResumePreview() {
   const handleDownload = () => {
-    window.open(RESUME_URL, '_blank');
+    window.open(RESUME_URL, "_blank");
   };
 
   return (

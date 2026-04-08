@@ -1,19 +1,25 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import FloatingShapes from './FloatingShapes';
-import { Download } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
+import { Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const PROFILE_IMG = 'https://res.cloudinary.com/doxeuimhd/image/upload/v1773502332/std5ergpi3jnprky4eku_hvmrdl.jpg';
-const RESUME_URL = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf';
+const PROFILE_IMG =
+  "https://res.cloudinary.com/doxeuimhd/image/upload/v1773502332/std5ergpi3jnprky4eku_hvmrdl.jpg";
+const RESUME_URL =
+  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf";
 
 export default function HeroSection() {
-  const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-  const handleDownloadResume = () => window.open(RESUME_URL, '_blank');
+  const scrollTo = (id) =>
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  const handleDownloadResume = () => window.open(RESUME_URL, "_blank");
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Animated background */}
       <div className="absolute inset-0 bg-zinc-950" />
       <FloatingShapes />
@@ -30,28 +36,15 @@ export default function HeroSection() {
               Hello, I'm
             </p>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-              Ganesh
+              Ganesh Manchala
             </h1>
-            <div className="mt-4 text-xl sm:text-2xl font-light h-16">
-              <TypeAnimation
-                sequence={[
-                  'Web Developer',
-                  2000,
-                  'Responsive Design',
-                  2000,
-                  'Problem Solver',
-                  2000,
-                  'Full Stack Developer',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                className="text-emerald-400"
-                repeat={Infinity}
-              />
+            <div className="mt-4 text-xl sm:text-2xl font-semibold text-emerald-50 text-balance">
+              Frontend Engineer | React Ecosystem
             </div>
-            <p className="mt-6 text-zinc-500 max-w-lg text-base leading-relaxed mx-auto lg:mx-0">
-              A passionate developer building modern web applications, exploring cybersecurity, and solving problems with clean code.
+            <p className="mt-6 text-zinc-400 max-w-lg text-base leading-relaxed mx-auto lg:mx-0">
+              Architecting scalable, responsive web interfaces and converting
+              complex business requirements into seamless, high-performance user
+              experiences.
             </p>
           </motion.div>
 
@@ -61,25 +54,31 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center gap-4 justify-center lg:justify-start"
           >
-            <button
-              onClick={() => scrollTo('#projects')}
+            <Link
+              to="/projects"
               className="group px-7 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 hover:scale-105 text-sm"
             >
-              <span className="inline-block group-hover:translate-x-1 transition-transform">View Projects</span>
-            </button>
+              <span className="inline-block group-hover:translate-x-1 transition-transform">
+                View Projects
+              </span>
+            </Link>
             <button
               onClick={handleDownloadResume}
               className="group flex items-center gap-2 px-7 py-3.5 border border-zinc-700 hover:border-emerald-500/50 text-zinc-300 hover:text-white rounded-xl transition-all duration-300 hover:bg-emerald-500/5 hover:scale-105 text-sm"
             >
               <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-              <span className="inline-block group-hover:translate-x-1 transition-transform">Download Resume</span>
+              <span className="inline-block group-hover:translate-x-1 transition-transform">
+                Download Resume
+              </span>
             </button>
-            <button
-              onClick={() => scrollTo('#contact')}
+            <Link
+              to="/contact"
               className="group px-7 py-3.5 border border-zinc-700 hover:border-emerald-500/50 text-zinc-300 hover:text-white rounded-xl transition-all duration-300 hover:bg-emerald-500/5 text-sm"
             >
-              <span className="inline-block group-hover:translate-x-1 transition-transform">Contact Me</span>
-            </button>
+              <span className="inline-block group-hover:translate-x-1 transition-transform">
+                Contact Me
+              </span>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -89,17 +88,25 @@ export default function HeroSection() {
             className="mt-10 flex items-center gap-3 justify-center lg:justify-start"
           >
             {[
-              { icon: Github, href: '#contact', label: 'GitHub' },
-              { icon: Linkedin, href: '#contact', label: 'LinkedIn' },
-              { icon: Mail, href: '#contact', label: 'Email' },
+              {
+                icon: Github,
+                href: "https://github.com/manchalaganesh",
+                label: "GitHub",
+              },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/ganesh-manchala/",
+                label: "LinkedIn",
+              },
+              { icon: Mail, href: "/contact", label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
-              <button
+              <Link
                 key={label}
-                onClick={() => scrollTo(href)}
+                to={href}
                 className="group w-10 h-10 rounded-lg border border-zinc-800 hover:border-emerald-500/30 flex items-center justify-center text-zinc-500 hover:text-emerald-400 transition-all duration-300 hover:bg-emerald-500/5 hover:scale-110"
               >
                 <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </button>
+              </Link>
             ))}
           </motion.div>
         </div>
@@ -117,14 +124,14 @@ export default function HeroSection() {
               <img
                 src={PROFILE_IMG}
                 alt="Ganesh"
-                className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-300"
               />
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator
       <motion.button
         onClick={() => scrollTo('#about')}
         initial={{ opacity: 0 }}
@@ -133,7 +140,7 @@ export default function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-zinc-600 hover:text-emerald-400 transition-colors"
       >
         <ArrowDown className="w-5 h-5" />
-      </motion.button>
+      </motion.button> */}
     </section>
   );
 }

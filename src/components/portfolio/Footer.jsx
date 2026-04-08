@@ -1,5 +1,5 @@
-import React from 'react';
-import { Code2, Heart } from 'lucide-react';
+import React from "react";
+import { Code2, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
           </span>
         </div>
         <p className="text-sm text-zinc-600 flex items-center gap-1">
-          Built with <Heart className="w-3 h-3 text-emerald-400 fill-emerald-400" /> and code
+          Built with love and code
         </p>
       </div>
     </footer>

@@ -1,55 +1,67 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Utensils, Leaf, Image } from 'lucide-react';
-import ProjectLightbox from './ProjectLightbox';
-
-const projects = [
-  {
-    title: 'Food Munch',
-    description: 'A responsive and user-friendly food enthusiast platform featuring curated recipes, restaurant reviews, and culinary blogs with intuitive navigation and interactive browsing.',
-    tech: ['HTML', 'CSS', 'Bootstrap'],
-    icon: Utensils,
-    accent: 'emerald',
-    link: 'https://foodonfoodmunch.niat.tech/',
-    screenshots: [
-      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80',
-      'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&q=80',
-      'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=80',
-    ],
-  },
-  {
-    title: 'DigiPanchayath',
-    description: 'A digital platform for rural governance built during a 48-hour hackathon. Features issue reporting, real-time tracking, and auto-routing system serving all 33 districts of Telangana.',
-    tech: ['HTML', 'CSS', 'Supabase', 'Supabase Auth'],
-    icon: Leaf,
-    accent: 'teal',
-    link: 'https://telangana.lovable.app/',
-    screenshots: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80',
-      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80',
-    ],
-  },
-];
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Image, Github, Folder } from "lucide-react";
+import ProjectLightbox from "./ProjectLightbox";
+import { iconMap } from "../../data/projects";
 
 const accentMap = {
   emerald: {
-    bg: 'bg-emerald-500/10',
-    border: 'hover:border-emerald-500/30',
-    icon: 'text-emerald-400',
-    tag: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    thumb: 'hover:border-emerald-500/50',
+    bg: "bg-emerald-500/10",
+    border: "hover:border-emerald-500/30",
+    icon: "text-emerald-400",
+    tag: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    thumb: "hover:border-emerald-500/50",
   },
   teal: {
-    bg: 'bg-teal-500/10',
-    border: 'hover:border-teal-500/30',
-    icon: 'text-teal-400',
-    tag: 'bg-teal-500/10 text-teal-400 border-teal-500/20',
-    thumb: 'hover:border-teal-500/50',
+    bg: "bg-teal-500/10",
+    border: "hover:border-teal-500/30",
+    icon: "text-teal-400",
+    tag: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+    thumb: "hover:border-teal-500/50",
   },
 };
 
-export default function ProjectsSection() {
+export default function ProjectsSection({
+  projectsProp = [],
+  showFilter = false,
+  maxItems = undefined,
+}) {
   const [lightbox, setLightbox] = useState(null); // { project, imageIndex }
+  const [filter, setFilter] = useState("All");
+
+  // Parse new-line delimited descriptionRaw into structured HTML formatting
+  const renderDescription = (text) => {
+    if (!text) return null;
+    const lines = text.split("\n");
+    return (
+      <div className="space-y-2 text-sm leading-relaxed">
+        {lines.map((line, i) => {
+          const splitPoint = line.indexOf(":");
+          if (splitPoint !== -1 && splitPoint < 20) {
+            const bold = line.slice(0, splitPoint + 1);
+            const rest = line.slice(splitPoint + 1);
+            return (
+              <p key={i}>
+                <strong className="text-zinc-200 dark:text-zinc-200">
+                  {bold}
+                </strong>
+                {rest}
+              </p>
+            );
+          }
+          return <p key={i}>{line}</p>;
+        })}
+      </div>
+    );
+  };
+
+  const allTechs = ["All", ...new Set(projectsProp.flatMap((p) => p.tech))]
+    .filter((v, i, a) => a.indexOf(v) === i)
+    .slice(0, 5);
+
+  const filteredProjects = projectsProp
+    .filter((p) => filter === "All" || p.tech.includes(filter))
+    .slice(0, maxItems || projectsProp.length);
 
   return (
     <section id="projects" className="relative py-28 bg-zinc-950">
@@ -58,24 +70,49 @@ export default function ProjectsSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-3">What I've built</p>
+          <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-3">
+            What I've built
+          </p>
           <h2 className="text-4xl font-bold text-white">Projects</h2>
         </motion.div>
 
+        {showFilter && allTechs.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
+            {allTechs.map((tech) => (
+              <button
+                key={tech}
+                onClick={() => setFilter(tech)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  filter === tech
+                    ? "bg-emerald-500 text-zinc-950 shadow-lg shadow-emerald-500/20"
+                    : "bg-zinc-900/60 border border-zinc-800/50 text-zinc-400 hover:text-white hover:border-emerald-500/30"
+                }`}
+              >
+                {tech}
+              </button>
+            ))}
+          </motion.div>
+        )}
+
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {projects.map((project, i) => {
-            const colors = accentMap[project.accent];
-            const Icon = project.icon;
+          {filteredProjects.map((project, i) => {
+            const colors = accentMap[project.accent] || accentMap.emerald;
+            const Icon = iconMap[project.iconName] || Folder;
             return (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 className={`group relative rounded-2xl bg-zinc-900/40 border border-zinc-800/50 ${colors.border} transition-all duration-500 hover:bg-zinc-900/60 hover:shadow-2xl hover:shadow-emerald-500/10 overflow-hidden`}
               >
@@ -96,7 +133,9 @@ export default function ProjectsSection() {
                         <Image className="w-4 h-4" />
                         View Screenshots
                         {project.screenshots.length > 1 && (
-                          <span className="text-zinc-400">({project.screenshots.length})</span>
+                          <span className="text-zinc-400">
+                            ({project.screenshots.length})
+                          </span>
                         )}
                       </div>
                     </div>
@@ -106,10 +145,17 @@ export default function ProjectsSection() {
                         {project.screenshots.map((src, idx) => (
                           <button
                             key={idx}
-                            onClick={(e) => { e.stopPropagation(); setLightbox({ project, imageIndex: idx }); }}
-                            className={`w-10 h-7 rounded overflow-hidden border-2 transition-all ${idx === 0 ? 'border-emerald-400' : 'border-zinc-600 ' + colors.thumb}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setLightbox({ project, imageIndex: idx });
+                            }}
+                            className={`w-10 h-7 rounded overflow-hidden border-2 transition-all ${idx === 0 ? "border-emerald-400" : "border-zinc-600 " + colors.thumb}`}
                           >
-                            <img src={src} alt="" className="w-full h-full object-cover" />
+                            <img
+                              src={src}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
                           </button>
                         ))}
                       </div>
@@ -119,28 +165,43 @@ export default function ProjectsSection() {
 
                 {/* Card body */}
                 <div className="p-7">
-                  <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className={`w-6 h-6 ${colors.icon} group-hover:rotate-6 transition-transform duration-300`} />
+                  <div
+                    className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <Icon
+                      className={`w-6 h-6 ${colors.icon} group-hover:rotate-6 transition-transform duration-300`}
+                    />
                   </div>
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-xl font-semibold text-white group-hover:text-emerald-400 transition-all duration-300">
                       {project.title}
                     </h3>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-zinc-600 hover:text-emerald-400 transition-colors flex-shrink-0 ml-3"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    )}
                     {project.link && (
                       <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-zinc-600 hover:text-emerald-400 transition-colors flex-shrink-0"
+                        className="text-zinc-600 hover:text-emerald-400 transition-colors flex-shrink-0 ml-3"
                       >
                         <ExternalLink className="w-5 h-5" />
                       </a>
                     )}
                   </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-5">
-                    {project.description}
-                  </p>
+                  <div className="text-zinc-400 text-sm leading-relaxed mb-5">
+                    {renderDescription(project.descriptionRaw)}
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((t, idx) => (
                       <motion.span
