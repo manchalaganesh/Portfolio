@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { NavLink, Link } from "react-router-dom";
-
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Skills", href: "/skills" },
-  { label: "Projects", href: "/projects" },
-  { label: "Certifications & Workshops", href: "/certifications" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Certifications & Workshops", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -40,8 +38,8 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo + Name */}
-        <Link
-          to="/"
+        <a
+          href="#hero"
           onClick={() => handleClick()}
           className="flex items-center gap-2 group"
         >
@@ -57,24 +55,18 @@ export default function Navbar() {
           <span className="text-lg font-semibold text-white tracking-tight">
             Ganesh<span className="text-emerald-400">.</span>
           </span>
-        </Link>
+        </a>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <NavLink
+            <a
               key={link.href}
-              to={link.href}
-              className={({ isActive }) =>
-                `px-4 py-2 text-sm rounded-lg transition-all duration-300 ${
-                  isActive
-                    ? "text-emerald-400 bg-white/10"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
-                }`
-              }
+              href={link.href}
+              className="px-4 py-2 text-sm rounded-lg transition-all duration-300 text-zinc-400 hover:text-white hover:bg-white/5"
             >
               {link.label}
-            </NavLink>
+            </a>
           ))}
         </div>
 
@@ -102,20 +94,14 @@ export default function Navbar() {
           >
             <div className="px-6 py-4 space-y-1">
               {navLinks.map((link) => (
-                <NavLink
+                <a
                   key={link.href}
-                  to={link.href}
+                  href={link.href}
                   onClick={handleClick}
-                  className={({ isActive }) =>
-                    `block w-full text-left px-4 py-3 rounded-lg transition-all text-sm ${
-                      isActive
-                        ? "text-emerald-400 bg-white/10"
-                        : "text-zinc-400 hover:text-white hover:bg-white/5"
-                    }`
-                  }
+                  className="block w-full text-left px-4 py-3 rounded-lg transition-all text-sm text-zinc-400 hover:text-white hover:bg-white/5"
                 >
                   {link.label}
-                </NavLink>
+                </a>
               ))}
             </div>
           </motion.div>

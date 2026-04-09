@@ -91,11 +91,10 @@ export default function ProjectsSection({
               <button
                 key={tech}
                 onClick={() => setFilter(tech)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  filter === tech
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === tech
                     ? "bg-emerald-500 text-zinc-950 shadow-lg shadow-emerald-500/20"
                     : "bg-zinc-900/60 border border-zinc-800/50 text-zinc-400 hover:text-white hover:border-emerald-500/30"
-                }`}
+                  }`}
               >
                 {tech}
               </button>

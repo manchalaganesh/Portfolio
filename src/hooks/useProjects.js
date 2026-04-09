@@ -27,7 +27,7 @@ const defaultProjects = [
     id: "2",
     title: "DigiPanchayath",
     descriptionRaw:
-      "Problem: Rural governance across Telangana lacked a centralized issue-reporting infrastructure.\nApproach: Designed a mobile-first portal with auto-routing.\nTech Stack: React, Tailwind CSS, Supabase.\nChallenges: Integrating secure role-based auth.\nSolution: Engineered full-stack architecture using Supabase.\nResults: Successfully deployed to 33 districts.",
+      "Problem: Rural governance across Telangana lacked a centralized issue-reporting infrastructure.\nApproach: Designed a mobile-first portal with routeing and scrolling.\nTech Stack: React, Tailwind CSS, Supabase.\nChallenges: Integrating secure role-based auth.\nSolution: Engineered full-stack architecture using Supabase.\nResults: Successfully deployed to 33 districts.",
     tech: ["HTML", "CSS", "Supabase", "React", "Tailwind CSS"],
     iconName: "Leaf",
     accent: "teal",

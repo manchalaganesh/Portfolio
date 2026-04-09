@@ -5,14 +5,13 @@ import {
   Database,
   Wrench,
   Monitor,
-  Server,
   Terminal,
 } from "lucide-react";
 
 const skillCategories = [
   {
     id: "frontend",
-    title: "Frontend Core",
+    title: "Frontend",
     icon: <Monitor className="w-6 h-6" />,
     gradient: "from-blue-500/20 to-cyan-500/20",
     barGradient: "from-blue-500 to-cyan-400",
@@ -20,17 +19,16 @@ const skillCategories = [
     border: "border-cyan-500/10",
     shadow: "shadow-cyan-500/20",
     skills: [
-      { name: "React", level: 90 },
-      { name: "JavaScript (ES6+)", level: 85 },
-      { name: "HTML5 & CSS3", level: 95 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "Framer Motion", level: 75 },
+      { name: "HTML", level: 95 },
+      { name: "CSS", level: 90 },
+      { name: "JavaScript", level: 85 },
+      { name: "Bootstrap", level: 85 },
     ],
   },
   {
-    id: "backend",
-    title: "Backend & Cloud",
-    icon: <Server className="w-6 h-6" />,
+    id: "programming",
+    title: "Programming",
+    icon: <Code2 className="w-6 h-6" />,
     gradient: "from-emerald-500/20 to-teal-500/20",
     barGradient: "from-emerald-500 to-teal-400",
     borderActive: "border-emerald-500/50",
@@ -38,13 +36,12 @@ const skillCategories = [
     shadow: "shadow-emerald-500/20",
     skills: [
       { name: "Python", level: 80 },
-      { name: "RESTful APIs", level: 85 },
-      { name: "Node.js", level: 70 },
+      { name: "C++", level: 75 },
     ],
   },
   {
     id: "tools",
-    title: "Tools & Practices",
+    title: "Tools",
     icon: <Wrench className="w-6 h-6" />,
     gradient: "from-purple-500/20 to-pink-500/20",
     barGradient: "from-purple-500 to-pink-400",
@@ -52,9 +49,9 @@ const skillCategories = [
     border: "border-purple-500/10",
     shadow: "shadow-purple-500/20",
     skills: [
-      { name: "Git & GitHub", level: 88 },
-      { name: "Vite", level: 85 },
-      { name: "Responsive Design", level: 95 },
+      { name: "Git", level: 88 },
+      { name: "GitHub", level: 88 },
+      { name: "VS Code", level: 95 },
     ],
   },
 ];

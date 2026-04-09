@@ -1,9 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
 import { Download } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const PROFILE_IMG =
   "https://res.cloudinary.com/doxeuimhd/image/upload/v1773502332/std5ergpi3jnprky4eku_hvmrdl.jpg";
@@ -11,8 +10,6 @@ const RESUME_URL =
   "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf";
 
 export default function HeroSection() {
-  const scrollTo = (id) =>
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   const handleDownloadResume = () => window.open(RESUME_URL, "_blank");
 
   return (
@@ -33,18 +30,16 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-4">
-              Hello, I'm
+              Hi, I'm Ganesh 👋
             </p>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-              Ganesh Manchala
+              A passionate Frontend Developer and Problem Solver.
             </h1>
             <div className="mt-4 text-xl sm:text-2xl font-semibold text-emerald-50 text-balance">
-              Frontend Engineer | React Ecosystem
+              🚀 Turning ideas into real-world web applications
             </div>
             <p className="mt-6 text-zinc-400 max-w-lg text-base leading-relaxed mx-auto lg:mx-0">
-              Architecting scalable, responsive web interfaces and converting
-              complex business requirements into seamless, high-performance user
-              experiences.
+              I build modern, responsive, and user-friendly web applications using HTML, CSS, JavaScript, and Python. I enjoy solving real-world problems through code and continuously improving my skills.
             </p>
           </motion.div>
 
@@ -54,14 +49,14 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center gap-4 justify-center lg:justify-start"
           >
-            <Link
-              to="/projects"
+            <a
+              href="#projects"
               className="group px-7 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 hover:scale-105 text-sm"
             >
               <span className="inline-block group-hover:translate-x-1 transition-transform">
                 View Projects
               </span>
-            </Link>
+            </a>
             <button
               onClick={handleDownloadResume}
               className="group flex items-center gap-2 px-7 py-3.5 border border-zinc-700 hover:border-emerald-500/50 text-zinc-300 hover:text-white rounded-xl transition-all duration-300 hover:bg-emerald-500/5 hover:scale-105 text-sm"
@@ -71,14 +66,14 @@ export default function HeroSection() {
                 Download Resume
               </span>
             </button>
-            <Link
-              to="/contact"
+            <a
+              href="#contact"
               className="group px-7 py-3.5 border border-zinc-700 hover:border-emerald-500/50 text-zinc-300 hover:text-white rounded-xl transition-all duration-300 hover:bg-emerald-500/5 text-sm"
             >
               <span className="inline-block group-hover:translate-x-1 transition-transform">
                 Contact Me
               </span>
-            </Link>
+            </a>
           </motion.div>
 
           <motion.div
@@ -98,15 +93,15 @@ export default function HeroSection() {
                 href: "https://www.linkedin.com/in/ganesh-manchala/",
                 label: "LinkedIn",
               },
-              { icon: Mail, href: "/contact", label: "Email" },
+              { icon: Mail, href: "#contact", label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
-              <Link
+              <a
                 key={label}
-                to={href}
+                href={href}
                 className="group w-10 h-10 rounded-lg border border-zinc-800 hover:border-emerald-500/30 flex items-center justify-center text-zinc-500 hover:text-emerald-400 transition-all duration-300 hover:bg-emerald-500/5 hover:scale-110"
               >
                 <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </Link>
+              </a>
             ))}
           </motion.div>
         </div>

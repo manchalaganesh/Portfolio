@@ -70,9 +70,11 @@ export default function ContactSection() {
         {/* Heading */}
         <motion.div className="text-center mb-16">
           <p className="text-emerald-400 text-sm uppercase mb-2">
-            Let's connect
+            Let's connect and build something amazing 🚀
           </p>
-          <h2 className="text-4xl font-bold text-white">Contact Me</h2>
+          <h2 className="text-4xl font-bold text-white flex items-center justify-center gap-3">
+            📬 Contact Me
+          </h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
