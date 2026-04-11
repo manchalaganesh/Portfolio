@@ -115,7 +115,7 @@ export default function HeroSection() {
         >
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-60 group-hover:opacity-80" />
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-zinc-800/50 group-hover:border-emerald-500/20 transition-all duration-500">
+            <div className="relative w-64 h-70 sm:w-72 sm:h-80 lg:w-80 lg:h-84 rounded-3xl overflow-hidden border-2 border-zinc-800/50 group-hover:border-emerald-500/20 transition-all duration-500">
               <img
                 src={PROFILE_IMG}
                 alt="Ganesh"
