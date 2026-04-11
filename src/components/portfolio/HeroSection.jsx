@@ -5,7 +5,7 @@ import FloatingShapes from "./FloatingShapes";
 import { Download } from "lucide-react";
 
 const PROFILE_IMG =
-  "https://res.cloudinary.com/doxeuimhd/image/upload/v1773502332/std5ergpi3jnprky4eku_hvmrdl.jpg";
+  "https://res.cloudinary.com/doxeuimhd/image/upload/v1775880392/WhatsApp_Image_2026-04-11_at_9.33.43_AM_1_qy3ks2.jpg";
 const RESUME_URL =
   "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b56a37418a4de906846443/2b325b82e_Ganesh_Manchala_Resume.pdf";
 
